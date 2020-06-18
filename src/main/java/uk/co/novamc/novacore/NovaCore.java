@@ -5,10 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.co.novamc.novacore.commands.MainCommand;
-import uk.co.novamc.novacore.events.FoodLevelChange;
-import uk.co.novamc.novacore.events.JoinEvent;
-import uk.co.novamc.novacore.events.PrepareItemCraftEvent;
-import uk.co.novamc.novacore.events.QuitEvent;
+import uk.co.novamc.novacore.events.*;
 import uk.co.novamc.novacore.files.JoinLeaveFile;
 import uk.co.novamc.novacore.files.ScoreboardFile;
 import uk.co.novamc.novacore.tasks.UpdateScoreboard;
@@ -47,6 +44,7 @@ public final class NovaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new QuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new PrepareItemCraftEvent(this), this);
         getServer().getPluginManager().registerEvents(new FoodLevelChange(this), this);
+        getServer().getPluginManager().registerEvents(new ProjectileLaunch(this), this);
 
         //tasks
         new UpdateScoreboard(this).runTaskTimer(this, 100, scoreboardFile.getInt("update_interval"));

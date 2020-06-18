@@ -1,3 +1,4 @@
 generic:
   disable_hopper_gapple_crafting: true
   disable_hunder: true
+  disable_pots_on_island: true
