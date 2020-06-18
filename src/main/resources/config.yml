@@ -1,2 +1,3 @@
 generic:
   disable_hopper_gapple_crafting: true
+  disable_hunder: true
