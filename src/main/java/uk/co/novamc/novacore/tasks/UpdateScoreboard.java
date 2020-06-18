@@ -11,6 +11,7 @@ import uk.co.novamc.novacore.NovaCore;
 import java.util.List;
 
 public class UpdateScoreboard extends BukkitRunnable {
+
     private NovaCore plugin;
     public UpdateScoreboard(NovaCore plugin) {
         this.plugin = plugin;
