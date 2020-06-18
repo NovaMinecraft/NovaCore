@@ -1,0 +1,7 @@
+name: NovaCore
+version: ${project.version}
+main: uk.co.novamc.novacore.NovaCore
+api-version: 1.15.2
+prefix: NovaMC
+authors: [JamesLloyd, Leo]
+description: NovaMC core plugin
