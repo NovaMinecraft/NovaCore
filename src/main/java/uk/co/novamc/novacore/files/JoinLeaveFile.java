@@ -27,12 +27,15 @@ public class JoinLeaveFile {
         //check exists
         if (!file.exists()) {
             try {
-                file.createNewFile();
-                dataFile = YamlConfiguration.loadConfiguration(file);
-                dataFile.set("join_message", "&c&l[!&c&l] &r%luckperms_prefix%&7%player_name% is &2online");
-                dataFile.set("leave_message", "&c&l[!&c&l] &r%luckperms_prefix%&7%player_name% &7is &coffline");
-                dataFile.set("first_join_message", "&c&l[!&c&l] &7New player &2%player_name% &7has joined! &7(#&b&l{player_number}&7)");
-                dataFile.set("total_players", 0);
+                if (file.createNewFile()) {
+                    dataFile = YamlConfiguration.loadConfiguration(file);
+                    dataFile.set("join_message", "&c&l[!&c&l] &r%luckperms_prefix%&7%player_name% is &2online");
+                    dataFile.set("leave_message", "&c&l[!&c&l] &r%luckperms_prefix%&7%player_name% &7is &coffline");
+                    dataFile.set("first_join_message", "&c&l[!&c&l] &7New player &2%player_name% &7has joined! &7(#&b&l{player_number}&7)");
+                    dataFile.set("total_players", 0);
+                } else {
+                    System.out.println("[ERROR] JoinLeave File already exists!");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

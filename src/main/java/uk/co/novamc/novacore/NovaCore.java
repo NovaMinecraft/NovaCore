@@ -2,12 +2,12 @@ package uk.co.novamc.novacore;
 
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.co.novamc.novacore.commands.MainCommand;
 import uk.co.novamc.novacore.events.JoinEvent;
 import uk.co.novamc.novacore.events.QuitEvent;
 import uk.co.novamc.novacore.files.JoinLeaveFile;
-
-import java.util.logging.Logger;
 
 public final class NovaCore extends JavaPlugin {
 
@@ -15,13 +15,11 @@ public final class NovaCore extends JavaPlugin {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
-    public Logger logger;
+    final Logger logger = LoggerFactory.getLogger(NovaCore.class);
     public JoinLeaveFile joinLeaveFile;
 
     @Override
     public void onEnable() {
-        logger = getLogger();
-
         saveDefaultConfig();
 
         //join leave config file
