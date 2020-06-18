@@ -33,6 +33,7 @@ public class JoinLeaveFile {
                     dataFile.set("leave_message", "&c&l[!&c&l] &r%luckperms_prefix%&7%player_name% &7is &coffline");
                     dataFile.set("first_join_message", "&c&l[!&c&l] &7New player &2%player_name% &7has joined! &7(#&b&l{player_number}&7)");
                     dataFile.set("total_players", 0);
+                    dataFile.save(file);
                 } else {
                     System.out.println("[ERROR] JoinLeave File already exists!");
                 }

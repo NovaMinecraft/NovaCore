@@ -8,6 +8,8 @@ import uk.co.novamc.novacore.commands.MainCommand;
 import uk.co.novamc.novacore.events.JoinEvent;
 import uk.co.novamc.novacore.events.QuitEvent;
 import uk.co.novamc.novacore.files.JoinLeaveFile;
+import uk.co.novamc.novacore.files.ScoreboardFile;
+import uk.co.novamc.novacore.tasks.UpdateScoreboard;
 
 public final class NovaCore extends JavaPlugin {
 
@@ -17,6 +19,7 @@ public final class NovaCore extends JavaPlugin {
 
     final Logger logger = LoggerFactory.getLogger(NovaCore.class);
     public JoinLeaveFile joinLeaveFile;
+    public ScoreboardFile scoreboardFile;
 
     @Override
     public void onEnable() {
@@ -28,12 +31,21 @@ public final class NovaCore extends JavaPlugin {
         joinLeaveFile.get().options().copyDefaults(true);
         joinLeaveFile.save();
 
+        //scoreboard config file
+        scoreboardFile = ScoreboardFile.getInstance();
+        scoreboardFile.setup();
+        scoreboardFile.get().options().copyDefaults(true);
+        scoreboardFile.save();
+
         //commands
         getCommand("nova").setExecutor(new MainCommand(this));
 
         //events
         getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
         getServer().getPluginManager().registerEvents(new QuitEvent(this), this);
+
+        //tasks
+        new UpdateScoreboard(this).runTaskTimer(this, 100, scoreboardFile.getInt("update_interval"));
 
         logger.info(chatColour("Core has been enabled!"));
     }

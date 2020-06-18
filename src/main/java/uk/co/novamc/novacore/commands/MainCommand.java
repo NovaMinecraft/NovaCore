@@ -21,6 +21,7 @@ public class MainCommand implements CommandExecutor {
             if (subCommand.equals("reload") && (sender.hasPermission("nova.reload") || !isPlayer)) {
                 plugin.reloadConfig();
                 plugin.joinLeaveFile.reload();
+                plugin.scoreboardFile.reload();
             }
         }
         return true;
