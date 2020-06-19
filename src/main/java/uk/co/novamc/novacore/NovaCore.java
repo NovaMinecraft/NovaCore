@@ -74,6 +74,7 @@ public final class NovaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockPlace(this), this);
         getServer().getPluginManager().registerEvents(new AsyncPlayerChat(this), this);
         getServer().getPluginManager().registerEvents(new EntityCombust(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerMove(this), this);
 
         //vaultAPI
         if (setupEconomy()) {

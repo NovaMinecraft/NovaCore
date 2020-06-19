@@ -4,3 +4,4 @@ generic:
   disable_pots_on_island: true
   one_spawner_per_chunk: true
   mobs_no_burn: true
+  island_void_tp: true
