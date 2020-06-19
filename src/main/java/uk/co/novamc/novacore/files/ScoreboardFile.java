@@ -20,10 +20,10 @@ public class ScoreboardFile {
     private File file;
     private FileConfiguration dataFile;
 
-    Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("NovaDungeons");
+    Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("NovaCore");
 
     public void setup() {
-        file = new File(plugin.getDataFolder(), "JoinLeave.yml");
+        file = new File(plugin.getDataFolder(), "Scoreboard.yml");
 
         //check exists
         if (!file.exists()) {
@@ -48,7 +48,7 @@ public class ScoreboardFile {
                     dataFile.set("lines", boardLines);
                     dataFile.save(file);
                 } else {
-                    System.out.println("[ERROR] JoinLeave File already exists!");
+                    System.out.println("[ERROR] File already exists!");
                 }
             } catch (IOException e) {
                 e.printStackTrace();

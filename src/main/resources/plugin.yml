@@ -16,3 +16,5 @@ commands:
     description: Shows plugins
     aliases:
     - pl
+  spawner:
+    description: Buy spawners quickly
