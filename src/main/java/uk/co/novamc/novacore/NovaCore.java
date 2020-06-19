@@ -55,6 +55,9 @@ public final class NovaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PrepareItemCraft(this), this);
         getServer().getPluginManager().registerEvents(new FoodLevelChange(this), this);
         getServer().getPluginManager().registerEvents(new ProjectileLaunch(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
+        getServer().getPluginManager().registerEvents(new BlockPlace(this), this);
+
 
         //tasks
         new UpdateScoreboard(this).runTaskTimer(this, 100, scoreboardFile.getInt("update_interval"));
