@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.co.novamc.novacore.commands.MainCommand;
 import uk.co.novamc.novacore.commands.PaperCommand;
+import uk.co.novamc.novacore.commands.Plugins;
 import uk.co.novamc.novacore.events.*;
 import uk.co.novamc.novacore.files.JoinLeaveFile;
 import uk.co.novamc.novacore.files.PaperCommandsFile;
@@ -48,6 +49,7 @@ public final class NovaCore extends JavaPlugin {
         //commands
         getCommand("nova").setExecutor(new MainCommand(this));
         getCommand("pcommand").setExecutor(new PaperCommand(this));
+        getCommand("plugins").setExecutor(new Plugins());
 
         //events
         getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);

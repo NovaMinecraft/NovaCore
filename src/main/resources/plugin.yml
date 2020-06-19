@@ -12,3 +12,7 @@ commands:
     description: Main plugin command
   pcommand:
     description: Executeable command via paper
+  plugins:
+    description: Shows plugins
+    aliases:
+    - pl
