@@ -5,8 +5,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.co.novamc.novacore.commands.MainCommand;
+import uk.co.novamc.novacore.commands.PaperCommand;
 import uk.co.novamc.novacore.events.*;
 import uk.co.novamc.novacore.files.JoinLeaveFile;
+import uk.co.novamc.novacore.files.PaperCommandsFile;
 import uk.co.novamc.novacore.files.ScoreboardFile;
 import uk.co.novamc.novacore.tasks.UpdateScoreboard;
 
@@ -19,6 +21,7 @@ public final class NovaCore extends JavaPlugin {
     final Logger logger = LoggerFactory.getLogger(NovaCore.class);
     public JoinLeaveFile joinLeaveFile;
     public ScoreboardFile scoreboardFile;
+    public PaperCommandsFile paperCommandsFile;
 
     @Override
     public void onEnable() {
@@ -36,13 +39,20 @@ public final class NovaCore extends JavaPlugin {
         scoreboardFile.get().options().copyDefaults(true);
         scoreboardFile.save();
 
+        //paper commands config file
+        paperCommandsFile = PaperCommandsFile.getInstance();
+        paperCommandsFile.setup();
+        paperCommandsFile.get().options().copyDefaults(true);
+        paperCommandsFile.save();
+
         //commands
         getCommand("nova").setExecutor(new MainCommand(this));
+        getCommand("pcommand").setExecutor(new PaperCommand(this));
 
         //events
-        getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
-        getServer().getPluginManager().registerEvents(new QuitEvent(this), this);
-        getServer().getPluginManager().registerEvents(new PrepareItemCraftEvent(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerQuit(this), this);
+        getServer().getPluginManager().registerEvents(new PrepareItemCraft(this), this);
         getServer().getPluginManager().registerEvents(new FoodLevelChange(this), this);
         getServer().getPluginManager().registerEvents(new ProjectileLaunch(this), this);
 

@@ -6,10 +6,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import uk.co.novamc.novacore.NovaCore;
 
-public class QuitEvent implements Listener {
+public class PlayerQuit implements Listener {
 
     private NovaCore plugin;
-    public QuitEvent(NovaCore plugin) {
+    public PlayerQuit(NovaCore plugin) {
         this.plugin = plugin;
     }
 

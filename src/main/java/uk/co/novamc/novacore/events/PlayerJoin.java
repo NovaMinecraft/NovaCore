@@ -12,10 +12,10 @@ import uk.co.novamc.novacore.NovaCore;
 
 import java.util.List;
 
-public class JoinEvent implements Listener {
+public class PlayerJoin implements Listener {
 
     private NovaCore plugin;
-    public JoinEvent(NovaCore plugin) {
+    public PlayerJoin(NovaCore plugin) {
         this.plugin = plugin;
     }
 

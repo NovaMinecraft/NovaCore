@@ -7,3 +7,8 @@ authors: [JamesLloyd, Leo]
 description: NovaMC core plugin
 softdepend:
   - PlaceholderAPI
+commands:
+  nova:
+    description: Main plugin command
+  pcommand:
+    description: Executeable command via paper

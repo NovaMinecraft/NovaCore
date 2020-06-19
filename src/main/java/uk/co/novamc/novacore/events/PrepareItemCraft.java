@@ -9,10 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import uk.co.novamc.novacore.NovaCore;
 
-public class PrepareItemCraftEvent implements Listener {
+public class PrepareItemCraft implements Listener {
 
     private NovaCore plugin;
-    public PrepareItemCraftEvent(NovaCore plugin) {
+    public PrepareItemCraft(NovaCore plugin) {
         this.plugin = plugin;
     }
 
