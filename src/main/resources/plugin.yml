@@ -13,6 +13,7 @@ softdepend:
   - HolographicDisplays
   - PlaceholderAPI
   - ASkyBlock
+  - LemonMobCoins
 commands:
   nova:
     description: Main plugin command

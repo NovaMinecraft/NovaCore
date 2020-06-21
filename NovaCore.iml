@@ -49,5 +49,14 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.0" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: me.max:lemonmobcoins:1.4">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/dependencies/lemonmobcoins-1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

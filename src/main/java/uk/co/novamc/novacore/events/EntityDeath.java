@@ -1,6 +1,7 @@
 package uk.co.novamc.novacore.events;
 
 import com.songoda.ultimatestacker.entity.EntityStack;
+import me.max.lemonmobcoins.common.LemonMobCoins;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
@@ -118,6 +119,36 @@ public class EntityDeath implements Listener {
                 }
             }
         }
-    }
 
+        //mobcoins
+
+        if (!(e.getEntity() instanceof Player) && e.getEntity().getKiller() != null) {
+            Entity entity = e.getEntity();
+            Player player = e.getEntity().getKiller();
+            //get config data
+            String path = "mobs." + entity.getType().name();
+            int chance = plugin.mobcoinConfig.getInt(path + ".chance");
+            int minAmount = plugin.mobcoinConfig.getInt(path + ".minamount");
+            int maxAmount = plugin.mobcoinConfig.getInt(path + ".maxamount");
+            //find the amount of mobs
+            EntityStack eStack = com.songoda.ultimatestacker.UltimateStacker.getInstance().getEntityStackManager().getStack(entity);
+            if (eStack != null) {
+                int entityAmount = eStack.getAmount();
+                //calculate amount of mobcoins to give for each mob in the stack
+                int mobcoins = 0;
+                for (int x=0; x<entityAmount; x++) {
+                    if ((random.nextInt(99) + 1) <= chance) {
+                        int addAmount = random.nextInt(maxAmount - minAmount + 1) + minAmount;
+                        mobcoins += addAmount;
+                    }
+                }
+                if (mobcoins > 0) {
+                    LemonMobCoins.getLemonMobCoinsAPI().addCoinsToPlayer(player.getUniqueId(), mobcoins);
+                    String message = plugin.mobcoinConfig.getString("recievemessage");
+                    message = message.replace("{amount}", Integer.toString(mobcoins));
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+                }
+            }
+        }
+    }
 }

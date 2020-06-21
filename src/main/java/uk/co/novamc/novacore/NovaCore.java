@@ -26,6 +26,7 @@ public final class NovaCore extends JavaPlugin {
     public StackedSpawnerValueFile stackValueFile;
     public IChestConfigFile iChestConfig;
     public IChestDatabaseFile iChestDatabase;
+    public MobcoinsConfigFile mobcoinConfig;
     public Economy econ = null;
 
     @Override
@@ -67,6 +68,12 @@ public final class NovaCore extends JavaPlugin {
         stackValueFile.setup();
         stackValueFile.get().options().copyDefaults(true);
         stackValueFile.save();
+
+        //mobcoin config file
+        mobcoinConfig = MobcoinsConfigFile.getInstance();
+        mobcoinConfig.setup();
+        mobcoinConfig.get().options().copyDefaults(true);
+        mobcoinConfig.save();
 
         //commands
         getCommand("nova").setExecutor(new MainCommand(this));
