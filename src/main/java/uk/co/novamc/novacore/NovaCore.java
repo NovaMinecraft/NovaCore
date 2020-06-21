@@ -6,15 +6,10 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.co.novamc.novacore.commands.MainCommand;
-import uk.co.novamc.novacore.commands.PaperCommand;
-import uk.co.novamc.novacore.commands.Plugins;
-import uk.co.novamc.novacore.commands.SpawnerBuy;
+import uk.co.novamc.novacore.commands.*;
 import uk.co.novamc.novacore.events.*;
-import uk.co.novamc.novacore.files.JoinLeaveFile;
-import uk.co.novamc.novacore.files.PaperCommandsFile;
-import uk.co.novamc.novacore.files.ScoreboardFile;
-import uk.co.novamc.novacore.files.StackedSpawnerValueFile;
+import uk.co.novamc.novacore.files.*;
+import uk.co.novamc.novacore.tasks.IChestAbsorb;
 import uk.co.novamc.novacore.tasks.UpdateScoreboard;
 
 public final class NovaCore extends JavaPlugin {
@@ -23,11 +18,13 @@ public final class NovaCore extends JavaPlugin {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
-    final Logger logger = LoggerFactory.getLogger(NovaCore.class);
+    public final Logger logger = LoggerFactory.getLogger(NovaCore.class);
     public JoinLeaveFile joinLeaveFile;
     public ScoreboardFile scoreboardFile;
     public PaperCommandsFile paperCommandsFile;
     public StackedSpawnerValueFile stackValueFile;
+    public IChestConfigFile iChestConfig;
+    public IChestDatabaseFile iChestDatabase;
     public Economy econ = null;
 
     @Override
@@ -58,11 +55,24 @@ public final class NovaCore extends JavaPlugin {
         stackValueFile.get().options().copyDefaults(true);
         stackValueFile.save();
 
+        //iChest config file
+        iChestDatabase = IChestDatabaseFile.getInstance();
+        iChestDatabase.setup();
+        iChestDatabase.get().options().copyDefaults(true);
+        iChestDatabase.save();
+
+        //iChest database file
+        stackValueFile = StackedSpawnerValueFile.getInstance();
+        stackValueFile.setup();
+        stackValueFile.get().options().copyDefaults(true);
+        stackValueFile.save();
+
         //commands
         getCommand("nova").setExecutor(new MainCommand(this));
         getCommand("pcommand").setExecutor(new PaperCommand(this));
         getCommand("plugins").setExecutor(new Plugins());
         getCommand("spawner").setExecutor(new SpawnerBuy(this));
+        getCommand("ichest").setExecutor(new IChestCommands(this));
 
         //events
         getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
@@ -70,19 +80,23 @@ public final class NovaCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PrepareItemCraft(this), this);
         getServer().getPluginManager().registerEvents(new FoodLevelChange(this), this);
         getServer().getPluginManager().registerEvents(new ProjectileLaunch(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
+        getServer().getPluginManager().registerEvents(new PlayerInteract(this), this);
         getServer().getPluginManager().registerEvents(new BlockPlace(this), this);
         getServer().getPluginManager().registerEvents(new AsyncPlayerChat(this), this);
         getServer().getPluginManager().registerEvents(new EntityCombust(this), this);
         getServer().getPluginManager().registerEvents(new PlayerMove(this), this);
+        getServer().getPluginManager().registerEvents(new BlockPlace(this), this);
+        getServer().getPluginManager().registerEvents(new EntityDeath(this), this);
+        getServer().getPluginManager().registerEvents(new InventoryClick(this), this);
+
+        //tasks
+        new UpdateScoreboard(this).runTaskTimer(this, 600, scoreboardFile.getInt("update_interval"));
+        new IChestAbsorb(this).runTaskTimer(this, 600, iChestConfig.getInt("iChest.updatespeed"));
 
         //vaultAPI
         if (setupEconomy()) {
             logger.info("Found Vault, hooking in for economy");
         }
-
-        //tasks
-        new UpdateScoreboard(this).runTaskTimer(this, 100, scoreboardFile.getInt("update_interval"));
 
         logger.info(chatColour("Core has been enabled!"));
     }

@@ -7,6 +7,8 @@ authors: [JamesLloyd, Leo]
 description: NovaMC core plugin
 softdepend:
   - PlaceholderAPI
+  - item-nbt-api
+  - VaultAPI
 commands:
   nova:
     description: Main plugin command
@@ -18,3 +20,5 @@ commands:
     - pl
   spawner:
     description: Buy spawners quickly
+  ichest:
+    description: Chunk collectors
