@@ -9,6 +9,10 @@ softdepend:
   - PlaceholderAPI
   - item-nbt-api
   - VaultAPI
+  - UltimateStacker
+  - HolographicDisplays
+  - PlaceholderAPI
+  - ASkyBlock
 commands:
   nova:
     description: Main plugin command

@@ -1,6 +1,7 @@
 package uk.co.novamc.novacore;
 
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -96,6 +97,10 @@ public final class NovaCore extends JavaPlugin {
         //vaultAPI
         if (setupEconomy()) {
             logger.info("Found Vault, hooking in for economy");
+        }
+
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new Placeholders(this).register();
         }
 
         logger.info(chatColour("Core has been enabled!"));
