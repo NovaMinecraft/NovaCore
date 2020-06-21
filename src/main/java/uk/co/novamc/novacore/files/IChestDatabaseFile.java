@@ -86,7 +86,10 @@ public class IChestDatabaseFile {
     }
 
     public Set<String> getLocations() {
-        Set<String> keys = dataFile.getConfigurationSection("chests").getKeys(false);
+        Set<String> keys = null;
+        if (dataFile.getConfigurationSection("chests") != null) {
+            keys = dataFile.getConfigurationSection("chests").getKeys(false);
+        }
         if (keys != null) {
             return keys;
         } else {

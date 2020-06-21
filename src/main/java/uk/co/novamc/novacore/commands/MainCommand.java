@@ -21,7 +21,7 @@ public class MainCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String string, String[] args) {
         if (args.length >=1) {
-            String subCommand = args[1];
+            String subCommand = args[0];
             boolean isPlayer = sender instanceof Player;
             if (subCommand.equals("reload") && (sender.hasPermission("nova.reload") || !isPlayer)) {
                 plugin.reloadConfig();

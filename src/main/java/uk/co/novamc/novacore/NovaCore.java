@@ -64,10 +64,10 @@ public final class NovaCore extends JavaPlugin {
         iChestDatabase.save();
 
         //iChest database file
-        stackValueFile = StackedSpawnerValueFile.getInstance();
-        stackValueFile.setup();
-        stackValueFile.get().options().copyDefaults(true);
-        stackValueFile.save();
+        iChestConfig = IChestConfigFile.getInstance();
+        iChestConfig.setup();
+        iChestConfig.get().options().copyDefaults(true);
+        iChestConfig.save();
 
         //mobcoin config file
         mobcoinConfig = MobcoinsConfigFile.getInstance();

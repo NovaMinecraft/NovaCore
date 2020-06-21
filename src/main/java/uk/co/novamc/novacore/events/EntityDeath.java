@@ -47,9 +47,9 @@ public class EntityDeath implements Listener {
                 }
 
                 //get config information
-                int minChance = plugin.getConfig().getInt("MobDrops." + entityType + ".min");
-                int maxChance = plugin.getConfig().getInt("MobDrops." + entityType + ".max");
-                Material drop = Material.getMaterial(plugin.getConfig().getString("MobDrops." + entityType + ".item"));
+                int minChance = plugin.iChestConfig.getInt("MobDrops." + entityType + ".min");
+                int maxChance = plugin.iChestConfig.getInt("MobDrops." + entityType + ".max");
+                Material drop = Material.getMaterial(plugin.iChestConfig.getString("MobDrops." + entityType + ".item"));
                 String dropName = drop.name();
 
                 //calculate how many drops should be added

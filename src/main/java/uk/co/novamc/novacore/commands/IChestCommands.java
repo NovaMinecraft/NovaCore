@@ -27,18 +27,6 @@ public class IChestCommands implements CommandExecutor {
         sender.sendMessage((ChatColor.translateAlternateColorCodes('&', msg)));
     }
 
-    private String getString(String string) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString(string, null));
-    }
-
-    private int getInt(String string) {
-        return plugin.getConfig().getInt(string, 0);
-    }
-
-    private Boolean getBoolean(String string) {
-        return plugin.getConfig().getBoolean(string, false);
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args[0].equals("give") && (sender.hasPermission("ichest.give") || !(sender instanceof Player))) {
@@ -50,7 +38,7 @@ public class IChestCommands implements CommandExecutor {
                 //create the iChest item stack and set item meta
                 ItemStack infChest = new ItemStack(Material.ENDER_CHEST, amount);
                 ItemMeta itemMeta = infChest.getItemMeta();
-                itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("iChest.displayname")));
+                itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', plugin.iChestConfig.getString("iChest.displayname")));
                 itemMeta.setLore(plugin.iChestConfig.getStringList("iChest.lore"));
                 infChest.setItemMeta(itemMeta);
 
