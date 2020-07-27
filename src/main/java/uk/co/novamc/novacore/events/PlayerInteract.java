@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -67,9 +68,14 @@ public class PlayerInteract implements Listener {
                 if (plugin.iChestDatabase.getLocations().contains(blockLocation)) {
                     String stringPlayerUUID = player.getUniqueId().toString();
                     String chestOwner = plugin.iChestDatabase.getOwner(blockLocation);
-                    List<?> trusted = plugin.iChestDatabase.getTrust(chestOwner);
-                    if (trusted == null) {
+
+                    ConfigurationSection trustConf = plugin.iChestDatabase.getTrust();
+
+                    List<?> trusted;
+                    if (trustConf == null) {
                         trusted = new ArrayList<String>();
+                    } else {
+                        trusted = trustConf.getList(chestOwner);
                     }
 
                     //only allow the owner or people they trust to open the chest

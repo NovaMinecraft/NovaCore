@@ -14,6 +14,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.co.novamc.novacore.NovaCore;
 
 import java.util.UUID;
@@ -24,6 +26,8 @@ public class BlockPlace implements Listener {
     public BlockPlace(NovaCore plugin) {
         this.plugin = plugin;
     }
+
+    final Logger logger = LoggerFactory.getLogger(BlockPlace.class);
 
     @EventHandler
     public void onPlace(BlockPlaceEvent e) {
@@ -79,7 +83,7 @@ public class BlockPlace implements Listener {
                         plugin.iChestDatabase.setHolo(hologramUUID + ".location_y", block.getY());
                         plugin.iChestDatabase.setHolo(hologramUUID + ".location_z", block.getZ());
 
-                        plugin.logger.info("iChest has been created at " + blockLocation + " by " + player.getName());
+                        logger.info("iChest has been created at " + blockLocation + " by " + player.getName());
                     }
                 }
             }

@@ -1,7 +1,6 @@
 package uk.co.novamc.novacore.files;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,7 +10,10 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Set;
 
 public class IChestDatabaseFile {
     static IChestDatabaseFile inst = new IChestDatabaseFile();
@@ -237,12 +239,8 @@ public class IChestDatabaseFile {
         return rawBlock;
     }
 
-    public List<?> getTrust(String chestOwner) {
-        if (dataFile.contains("trust")) {
-            return dataFile.getConfigurationSection("trust").getList(chestOwner);
-        } else {
-            return null;
-        }
+    public ConfigurationSection getTrust() {
+        return dataFile.getConfigurationSection("trust");
     }
 
     public void setTrust(String path, Object value) {

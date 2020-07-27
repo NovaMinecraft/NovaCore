@@ -7,6 +7,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.co.novamc.novacore.NovaCore;
 
 import java.util.HashMap;
@@ -17,6 +19,8 @@ public class IChestAbsorb extends BukkitRunnable {
     public IChestAbsorb(NovaCore plugin) {
         this.plugin = plugin;
     }
+
+    final Logger logger = LoggerFactory.getLogger(IChestAbsorb.class);
 
     @Override
     public void run() {
@@ -55,7 +59,7 @@ public class IChestAbsorb extends BukkitRunnable {
             }
         }
         if (plugin.iChestConfig.getBoolean("Logging.absorbitems")) {
-            plugin.logger.info("Absorbed " + itemTotal + " item(s) into " + chestTotal + " iChest(s)");
+            logger.info("Absorbed " + itemTotal + " item(s) into " + chestTotal + " iChest(s)");
         }
     }
 }

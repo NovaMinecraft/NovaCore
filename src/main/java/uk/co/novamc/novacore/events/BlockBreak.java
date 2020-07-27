@@ -15,6 +15,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.co.novamc.novacore.NovaCore;
 
 import java.util.UUID;
@@ -28,6 +30,8 @@ public class BlockBreak implements Listener {
     private void sendMsg(CommandSender sender, String msg) {
         sender.sendMessage((ChatColor.translateAlternateColorCodes('&', msg)));
     }
+
+    final Logger logger = LoggerFactory.getLogger(BlockBreak.class);
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
@@ -66,7 +70,7 @@ public class BlockBreak implements Listener {
                                 if (block.getLocation().equals(location)) {
                                     hologram.delete();
                                 }
-                                plugin.logger.info("Block Location: " + location.getX() + " " + location.getY() + " " + location.getZ());
+                                logger.info("Block Location: " + location.getX() + " " + location.getY() + " " + location.getZ());
                             }
 
                             //remove from config
