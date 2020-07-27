@@ -237,8 +237,12 @@ public class IChestDatabaseFile {
         return rawBlock;
     }
 
-    public ConfigurationSection getTrust() {
-        return dataFile.getConfigurationSection("trust");
+    public List<?> getTrust(String chestOwner) {
+        if (dataFile.contains("trust")) {
+            return dataFile.getConfigurationSection("trust").getList(chestOwner);
+        } else {
+            return null;
+        }
     }
 
     public void setTrust(String path, Object value) {

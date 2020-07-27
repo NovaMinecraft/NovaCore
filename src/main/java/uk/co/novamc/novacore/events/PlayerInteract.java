@@ -67,7 +67,7 @@ public class PlayerInteract implements Listener {
                 if (plugin.iChestDatabase.getLocations().contains(blockLocation)) {
                     String stringPlayerUUID = player.getUniqueId().toString();
                     String chestOwner = plugin.iChestDatabase.getOwner(blockLocation);
-                    List<?> trusted = plugin.iChestDatabase.getTrust().getList(chestOwner);
+                    List<?> trusted = plugin.iChestDatabase.getTrust(chestOwner);
                     if (trusted == null) {
                         trusted = new ArrayList<String>();
                     }

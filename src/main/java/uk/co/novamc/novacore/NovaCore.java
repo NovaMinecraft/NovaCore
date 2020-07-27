@@ -19,7 +19,7 @@ public final class NovaCore extends JavaPlugin {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
-    public final Logger logger = LoggerFactory.getLogger(NovaCore.class);
+    final Logger logger = LoggerFactory.getLogger(NovaCore.class);
     public JoinLeaveFile joinLeaveFile;
     public ScoreboardFile scoreboardFile;
     public PaperCommandsFile paperCommandsFile;
