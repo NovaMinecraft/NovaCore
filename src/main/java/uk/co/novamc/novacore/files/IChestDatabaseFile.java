@@ -240,7 +240,10 @@ public class IChestDatabaseFile {
     }
 
     public ConfigurationSection getTrust() {
-        return dataFile.getConfigurationSection("trust");
+        if (dataFile.contains("trust")) {
+            return dataFile.getConfigurationSection("trust");
+        }
+        return null;
     }
 
     public void setTrust(String path, Object value) {

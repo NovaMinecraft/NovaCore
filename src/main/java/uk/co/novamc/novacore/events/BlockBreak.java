@@ -38,9 +38,8 @@ public class BlockBreak implements Listener {
         Block block = e.getBlock();
         Player player = e.getPlayer();
         if (block.getType().equals(Material.ENDER_CHEST)) {
-            String blockLocation = Integer.toString(block.getX()) + " " + Integer.toString(block.getY()) + " " + Integer.toString(block.getZ());
+            String blockLocation = block.getX() + " " + block.getY() + " " + block.getZ();
             for (String possibleLoc : plugin.iChestDatabase.getLocations()) {
-
                 //found chest data
                 if (blockLocation.equals(possibleLoc)) {
                     ConfigurationSection chestData = plugin.iChestDatabase.getChest(blockLocation);
@@ -70,16 +69,19 @@ public class BlockBreak implements Listener {
                                 if (block.getLocation().equals(location)) {
                                     hologram.delete();
                                 }
-                                logger.info("Block Location: " + location.getX() + " " + location.getY() + " " + location.getZ());
+                                // logger.info("Block Location: " + location.getX() + " " + location.getY() + " " + location.getZ());
                             }
 
                             //remove from config
-                            for (String key : plugin.iChestDatabase.getTrust().getKeys(false)) {
-                                int locX = plugin.iChestDatabase.getTrust().getInt(key + ".location_x");
-                                int locY = plugin.iChestDatabase.getTrust().getInt(key + ".location_y");
-                                int locZ = plugin.iChestDatabase.getTrust().getInt(key + ".location_z");
-                                if (locX == block.getX() && locY == block.getY() && locZ == block.getZ()) {
-                                    plugin.iChestDatabase.setTrust(key, null);
+                            ConfigurationSection configurationSection = plugin.iChestDatabase.getHolo();
+                            if (configurationSection != null) {
+                                for (String key : configurationSection.getKeys(false)) {
+                                    int locX = configurationSection.getInt(key + ".location_x");
+                                    int locY = configurationSection.getInt(key + ".location_y");
+                                    int locZ = configurationSection.getInt(key + ".location_z");
+                                    if (locX == block.getX() && locY == block.getY() && locZ == block.getZ()) {
+                                        plugin.iChestDatabase.setHolo(key, null);
+                                    }
                                 }
                             }
 

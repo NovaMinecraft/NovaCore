@@ -36,13 +36,13 @@ public class ScoreboardFile {
                     ArrayList<String> boardLines = new ArrayList<>();
                     boardLines.add("&7[%localtime_time_HH:mm dd/MM/yyyy%]");
                     boardLines.add("&a┌─ &2Island");
-                    boardLines.add("&a│ &7IS Worth: &f$%asbformatted_worth%");
-                    boardLines.add("&a│ &7Members: &f%asbformatted_teamsize%/5");
+                    boardLines.add("&a│ &7IS Worth: &f$%is_worth%");
+                    boardLines.add("&a│ &7Members: &f%is_teamsize%/5");
                     boardLines.add("&a├─ &2Personal");
                     boardLines.add("&a│ &7Balance: &f$%vault_eco_balance_formatted%");
                     boardLines.add("&a│ &7Mobcoins: &f%lemonmobcoins_balance_formatted%");
                     boardLines.add("&a│ &7Vote Party: &f%VotingPlugin_VotePartyVotesCurrent%/15");
-                    boardLines.add("&a│ &7Chunk: &7X &f%asbformatted_chunkx% &7Z &f%asbformatted_chunkz%");
+                    boardLines.add("&a│ &7Chunk: &7X &f%is_chunkx% &7Z &f%is_chunkz%");
                     boardLines.add("&a└─");
                     boardLines.add("&aNova &f│ &2Skyblock");
                     dataFile.set("lines", boardLines);
