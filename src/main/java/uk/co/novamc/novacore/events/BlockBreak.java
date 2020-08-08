@@ -4,7 +4,6 @@ import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import de.tr7zw.nbtapi.NBTItem;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
@@ -38,7 +37,8 @@ public class BlockBreak implements Listener {
         Block block = e.getBlock();
         Player player = e.getPlayer();
         if (block.getType().equals(Material.ENDER_CHEST)) {
-            String blockLocation = block.getX() + " " + block.getY() + " " + block.getZ();
+            String blockLocation = (block.getX() + 1) + " " + block.getY() + " " + block.getZ();
+            logger.info("broke: " + blockLocation);
             for (String possibleLoc : plugin.iChestDatabase.getLocations()) {
                 //found chest data
                 if (blockLocation.equals(possibleLoc)) {
@@ -64,25 +64,20 @@ public class BlockBreak implements Listener {
 
                             //delete hologram
                             for (Hologram hologram : HologramsAPI.getHolograms(plugin)) {
-                                Location location = hologram.getLocation();
-                                location.subtract(0.5, 1.6, 0.5);
-                                if (block.getLocation().equals(location)) {
-                                    hologram.delete();
+                                logger.info(String.valueOf(hologram.getX()));
+                                logger.info(String.valueOf(hologram.getY()));
+                                logger.info(String.valueOf(hologram.getZ()));
+                                logger.info(String.valueOf(block.getX()));
+                                logger.info(String.valueOf(block.getY()));
+                                logger.info(String.valueOf(block.getZ()));
+                                if (hologram.getX() != block.getX() + 0.5) {
+                                    return;
+                                } else if (hologram.getY() != block.getY() + 1.6) {
+                                    return;
+                                } else if (hologram.getZ() != block.getZ() + 0.5) {
+                                    return;
                                 }
-                                // logger.info("Block Location: " + location.getX() + " " + location.getY() + " " + location.getZ());
-                            }
-
-                            //remove from config
-                            ConfigurationSection configurationSection = plugin.iChestDatabase.getHolo();
-                            if (configurationSection != null) {
-                                for (String key : configurationSection.getKeys(false)) {
-                                    int locX = configurationSection.getInt(key + ".location_x");
-                                    int locY = configurationSection.getInt(key + ".location_y");
-                                    int locZ = configurationSection.getInt(key + ".location_z");
-                                    if (locX == block.getX() && locY == block.getY() && locZ == block.getZ()) {
-                                        plugin.iChestDatabase.setHolo(key, null);
-                                    }
-                                }
+                                hologram.delete();
                             }
 
                             sendMsg(player, "&7You &c&lBroke &7your iChest and it is now in your inventory.");

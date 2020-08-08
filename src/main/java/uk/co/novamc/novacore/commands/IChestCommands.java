@@ -39,7 +39,11 @@ public class IChestCommands implements CommandExecutor {
                 ItemStack infChest = new ItemStack(Material.ENDER_CHEST, amount);
                 ItemMeta itemMeta = infChest.getItemMeta();
                 itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', plugin.iChestConfig.getString("iChest.displayname")));
-                itemMeta.setLore(plugin.iChestConfig.getStringList("iChest.lore"));
+                List<String> lores = new ArrayList<>();
+                for (String lore : plugin.iChestConfig.getStringList("iChest.lore")) {
+                    lores.add(ChatColor.translateAlternateColorCodes('&', lore));
+                }
+                itemMeta.setLore(lores);
                 infChest.setItemMeta(itemMeta);
 
                 //set the iChest nbt tag

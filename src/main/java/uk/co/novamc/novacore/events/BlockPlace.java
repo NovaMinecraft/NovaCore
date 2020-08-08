@@ -18,8 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.co.novamc.novacore.NovaCore;
 
-import java.util.UUID;
-
 public class BlockPlace implements Listener {
 
     private NovaCore plugin;
@@ -64,7 +62,10 @@ public class BlockPlace implements Listener {
                     //if the iChest is valid
                     if (nbti.getBoolean("isInfiniteChest")) {
 
-                        String blockLocation = block.getX() + " " + block.getY() + " " + block.getZ();
+                        int blockX = block.getX() + 1;
+                        int blockY = block.getY();
+                        int blockZ = block.getZ();
+                        String blockLocation = blockX + " " + blockY + " " + blockZ;
                         plugin.iChestDatabase.createChest(blockLocation, player, e.getBlock().getWorld());
 
                         //create hologram
@@ -74,14 +75,6 @@ public class BlockPlace implements Listener {
                         TextLine textLine1 = hologram.appendTextLine(plugin.iChestConfig.getString("iChest.displayname"));
                         String nameText = ChatColor.translateAlternateColorCodes('&', "&f&lOwner: &r" + player.getName()).trim();
                         TextLine textLine2 = hologram.insertTextLine(1, nameText);
-
-                        //add to config
-                        String hologramUUID = UUID.randomUUID().toString();
-                        plugin.iChestDatabase.setHolo(hologramUUID + ".owner", player.getName());
-                        plugin.iChestDatabase.setHolo(hologramUUID + ".world", player.getWorld().getName());
-                        plugin.iChestDatabase.setHolo(hologramUUID + ".location_x", block.getX());
-                        plugin.iChestDatabase.setHolo(hologramUUID + ".location_y", block.getY());
-                        plugin.iChestDatabase.setHolo(hologramUUID + ".location_z", block.getZ());
 
                         logger.info("iChest has been created at " + blockLocation + " by " + player.getName());
                     }

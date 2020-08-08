@@ -250,14 +250,6 @@ public class IChestDatabaseFile {
         dataFile.set("trust." + path, value);
     }
 
-    public ConfigurationSection getHolo() {
-        return dataFile.getConfigurationSection("holograms");
-    }
-
-    public void setHolo(String path, Object value) {
-        dataFile.set("holograms." + path, value);
-    }
-
     public void reload() {
         dataFile = YamlConfiguration.loadConfiguration(file);
     }
