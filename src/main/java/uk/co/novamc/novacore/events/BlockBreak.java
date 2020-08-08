@@ -38,7 +38,6 @@ public class BlockBreak implements Listener {
         Player player = e.getPlayer();
         if (block.getType().equals(Material.ENDER_CHEST)) {
             String blockLocation = (block.getX() + 1) + " " + block.getY() + " " + block.getZ();
-            logger.info("broke: " + blockLocation);
             for (String possibleLoc : plugin.iChestDatabase.getLocations()) {
                 //found chest data
                 if (blockLocation.equals(possibleLoc)) {
@@ -64,12 +63,6 @@ public class BlockBreak implements Listener {
 
                             //delete hologram
                             for (Hologram hologram : HologramsAPI.getHolograms(plugin)) {
-                                logger.info(String.valueOf(hologram.getX()));
-                                logger.info(String.valueOf(hologram.getY()));
-                                logger.info(String.valueOf(hologram.getZ()));
-                                logger.info(String.valueOf(block.getX()));
-                                logger.info(String.valueOf(block.getY()));
-                                logger.info(String.valueOf(block.getZ()));
                                 if (hologram.getX() != block.getX() + 0.5) {
                                     return;
                                 } else if (hologram.getY() != block.getY() + 1.6) {
