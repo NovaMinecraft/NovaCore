@@ -62,7 +62,8 @@ public class PlayerInteract implements Listener {
         if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             Block block = e.getClickedBlock();
             if (block.getType().equals(Material.ENDER_CHEST)) {
-                String blockLocation = block.getX() + " " + block.getY() + " " + block.getZ();
+                int blockX = block.getX() + 1;
+                String blockLocation = blockX + " " + block.getY() + " " + block.getZ();
 
                 //check the clicked block is an iChest
                 if (plugin.iChestDatabase.getLocations().contains(blockLocation)) {
@@ -121,7 +122,7 @@ public class PlayerInteract implements Listener {
                                 itemMeta.setDisplayName(guiItemName.replace("{material}", itemID));
                                 ArrayList<String> uniqueLore = new ArrayList<>();
                                 for (String line : guiItemLore) {
-                                    uniqueLore.add(line.replace("{amount}", formattedAmount));
+                                    uniqueLore.add(ChatColor.translateAlternateColorCodes('&', line.replace("{amount}", formattedAmount)));
                                 }
                                 itemMeta.setLore(uniqueLore);
                                 chestItem.setItemMeta(itemMeta);

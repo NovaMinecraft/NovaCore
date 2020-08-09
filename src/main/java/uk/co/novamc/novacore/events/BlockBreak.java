@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.co.novamc.novacore.NovaCore;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class BlockBreak implements Listener {
@@ -52,7 +54,11 @@ public class BlockBreak implements Listener {
                             ItemStack infChest = new ItemStack(Material.ENDER_CHEST, 1);
                             ItemMeta itemMeta = infChest.getItemMeta();
                             itemMeta.setDisplayName(plugin.iChestConfig.getString("iChest.displayname"));
-                            itemMeta.setLore(plugin.iChestConfig.getStringList("iChest.lore"));
+                            List<String> lores = new ArrayList<>();
+                            for (String lore : plugin.iChestConfig.getStringList("iChest.lore")) {
+                                lores.add(ChatColor.translateAlternateColorCodes('&', lore));
+                            }
+                            itemMeta.setLore(lores);
                             infChest.setItemMeta(itemMeta);
 
                             //set nbt tag

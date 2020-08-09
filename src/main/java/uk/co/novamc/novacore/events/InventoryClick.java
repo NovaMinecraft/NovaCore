@@ -200,7 +200,7 @@ public class InventoryClick implements Listener {
                 itemMeta.setDisplayName(guiItemName.replace("{material}", itemID));
                 ArrayList<String> uniqueLore = new ArrayList<>();
                 for (String line : guiItemLore) {
-                    uniqueLore.add(line.replace("{amount}", formattedAmount));
+                    uniqueLore.add(ChatColor.translateAlternateColorCodes('&', line.replace("{amount}", formattedAmount)));
                 }
                 itemMeta.setLore(uniqueLore);
                 chestItem.setItemMeta(itemMeta);
